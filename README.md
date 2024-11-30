@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# Design system Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple setup for building a React application using TypeScript and Vite. The project also demonstrates how to integrate and use components from the `salekin-design-system`.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Installing Salekin Design System
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To install the `salekin-design-system`, run the following command:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+npm install salekin-design-system
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Example Usage
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Here is an example of how to use components from the `salekin-design-system` in your application:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```tsx
+import { useState } from 'react'
+import './App.css'
+import { Button, Card, Modal } from 'salekin-design-system'
+
+function App() {
+  const [openModal, setOpenModal] = useState(false)
+  const footerItems = [
+    <Button onClick={() => setOpenModal(true)} colorPrimary='black' fontSize={20} type="primary">Add</Button>,
+    <Button danger variant="outlined">Remove</Button>,
+    <Button variant="solid">Hide</Button>,
+  ]
+
+  return (
+    <>
+      <Card title="Card Title"
+        body="this is the body of the card"
+        footerItems={footerItems} style={{ width: 300 }} />
+
+        <Modal open={openModal} setOpenModal={setOpenModal} title="Modal Title" modalBody={
+          "this is the body of the modal"
+        } />
+    </>
+  )
+}
+
+export default App
 ```
